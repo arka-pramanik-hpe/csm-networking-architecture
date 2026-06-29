@@ -208,10 +208,10 @@ sequenceDiagram
     participant B as Browser
     participant O as OAuth2 Proxy
     participant KC as Keycloak
-    participant GW as Istio gateway + OPA
+    participant GW as Istio gateway and OPA
     participant APP as Web app (e.g. Grafana)
 
-    B->>O: GET grafana.cmn.<domain> (no session)
+    B->>O: GET grafana.cmn.DOMAIN (no session)
     O->>B: 302 redirect to Keycloak login
     B->>KC: login (user/pass or SSO)
     KC-->>B: auth code → OAuth2 Proxy
@@ -246,7 +246,7 @@ sequenceDiagram
     participant SC as cray-smd sidecar (Envoy)
     participant SVC as cray-smd app
 
-    C->>DNS: resolve api.cmn.<domain>
+    C->>DNS: resolve api.cmn.DOMAIN
     DNS-->>C: 10.102.3.65 (MetalLB VIP)
     C->>SW: HTTPS + Bearer JWT
     SW->>GW: ECMP → gateway pod; TLS terminated
