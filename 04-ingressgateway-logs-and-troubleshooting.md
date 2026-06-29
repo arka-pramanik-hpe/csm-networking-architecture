@@ -131,7 +131,7 @@ not get an authorization decision.
 
 ```mermaid
 flowchart TD
-    s["Clients get 503; gateway logs show UAEX / ext_authz_error"] --> q1{"Are cray-opa-*<br/>pods Running?"}
+    s["Clients get 503, gateway logs show UAEX / ext_authz_error"] --> q1{"Are cray-opa-*<br/>pods Running?"}
     q1 -- No --> fixopa["Fix/restart OPA DaemonSets in opa ns"]
     q1 -- Yes --> q2{"Is Keycloak healthy?<br/>(token & JWKS reachable)"}
     q2 -- No --> fixkc["Recover Keycloak + keycloak-postgres<br/>→ OPA cannot verify Keycloak JWTs"]

@@ -219,7 +219,7 @@ sequenceDiagram
     O->>KC: exchange code → JWT
     O->>GW: forward request + JWT (x-forwarded-access-token)
     GW->>GW: OPA allows whitelisted web-app host
-    GW->>APP: route; inject X-WEBAUTH-USER, strip Authorization
+    GW->>APP: route, inject X-WEBAUTH-USER, strip Authorization
     APP-->>B: page
 ```
 
@@ -249,7 +249,7 @@ sequenceDiagram
     C->>DNS: resolve api.cmn.DOMAIN
     DNS-->>C: 10.102.3.65 (MetalLB VIP)
     C->>SW: HTTPS + Bearer JWT
-    SW->>GW: ECMP → gateway pod; TLS terminated
+    SW->>GW: ECMP → gateway pod, TLS terminated
     GW->>OPA: ext_authz gRPC (method, path, headers, JWT)
     OPA->>KC: fetch JWKS (cached) & verify signature/iss/aud
     OPA->>OPA: map roles → is GET /apis/smd/... allowed?
